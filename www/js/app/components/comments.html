@@ -1,0 +1,66 @@
+<div>
+	<div class="new-comment">
+		<h4>Add your Comment</h4>
+		<hr/>
+		<div>
+			<form on-submit='submit' class="form-horizontal">
+				<div class="form-group">
+					<input type="text" class="form-control" name="" id="name" value="{{name}}" placeholder='James Bond' required/>
+				</div>
+				<div class="form-group">
+					<input type="email" class="form-control" name="" id="author" value="{{author}}" placeholder='abc@example.com' required/>
+				</div>
+				<div class="form-group">
+					<textarea class="form-control" name="" id="comment" rows="3" value="{{text}}" placeholder='Your Comment...' required></textarea>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-default">Submit Comment</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="comments-block">
+		<h4>Comments</h4>
+		<hr/>
+		<ul class="list-unstyled">
+			{{#comments}}
+				<li>
+					<a href="{{author}}">{{name}}</a> says <blockquote><p>{{{text}}}</p></blockquote>...
+				</li>
+			{{/comments}}
+		</ul>
+	</div>
+</div>
+
+<script>
+	var getData = function () {
+		return [
+			{'name': 'abc', 'author': 'abc@example.com', 'text': 'Hello a fine weather'},
+			{'name': 'abc', 'author': 'abc@example.com', 'text': 'Such a fine weather'},
+		]
+	};
+
+
+	component.exports = {
+
+		data: function () {
+			return {
+				comments: getData()
+			};
+		},
+
+		onrender: function () {
+
+			this.on('submit', function (event) {
+				console.log(event);
+				this.push('comments', {
+					name: event.context.name,
+					author: event.context.author,
+					text: event.context.text
+				});
+
+				event.original.preventDefault();
+			});
+		}
+	}
+</script>
