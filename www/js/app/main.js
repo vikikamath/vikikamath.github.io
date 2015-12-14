@@ -23,8 +23,9 @@
 define([ 	'rvc!app/components/nav',
 			'rvc!app/components/intro',
 			'rvc!app/components/about',
-			'rvc!app/components/contact'
-		], function ( Nav, Intro, About, Contact ) {
+			'rvc!app/components/contact',
+			'rvc!app/components/footer'
+		], function ( Nav, Intro, About, Contact, Footer ) {
 
 	'use strict';
 
@@ -45,6 +46,11 @@ define([ 	'rvc!app/components/nav',
 	});
 
 	new Contact({
+		el: 'body',
+		append: true
+	});
+
+	new Footer({
 		el: 'body',
 		append: true
 	});
