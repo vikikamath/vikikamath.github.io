@@ -23,6 +23,14 @@ module.exports = {
 		 bootstrap: '../../bower_components/bootstrap/dist/js/bootstrap.min'
      },
 
+     stubModules: [ 'rvc' ],
+
+     shim: {
+		bootstrap: {
+			deps: ['jquery']
+		}
+	 },
+
      // path relative to baseUrl
      include: [
         "page",
