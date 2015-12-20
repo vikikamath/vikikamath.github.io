@@ -20,7 +20,8 @@
 //     });
 // });
 
-define([ 	'rvc!app/components/nav',
+define([
+			'rvc!app/components/nav',
 			'rvc!app/components/intro',
 			'rvc!app/components/about',
 			'rvc!app/components/contact',

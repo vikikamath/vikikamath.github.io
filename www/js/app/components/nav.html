@@ -11,18 +11,20 @@
 			</a>
 		</div>
 
-		<div class="collapse navbar-collapse navbar-right navbar-main-collapse {{ collapsed ? 'in': ''}}">
-			<ul on-click="toggle" class="nav navbar-nav">
+		<div class="collapse navbar-collapse navbar-right navbar-main-collapse {{ expanded ? 'in': ''}}">
+			<ul on-click="toggle" class="nav navbar-nav {{ expanded ? 'expanded' : 'collapsed' }}">
 
-				<li class="hidden">
+				{{#expanded}}
+				<li intro-outro='slide' class="hidden">
 					<a href="#page-top"></a>
 				</li>
-				<li>
+				<li intro-outro='slide'>
 					<a class="page-scroll" href="#about">About</a>
 				</li>
-				<li>
+				<li intro-outro='slide'>
 					<a class="page-scroll" href="#contact">Contact</a>
 				</li>
+				{{/expanded}}
 			</ul>
 		</div>
 	</div>
@@ -48,7 +50,7 @@
 	.navbar-custom .navbar-brand .navbar-toggle {
 	    padding: 4px 6px;
 	    font-size: 16px;
-	    color: #fff;
+	    color: #F5F5DC;
 	}
 
 	.navbar-custom .navbar-brand .navbar-toggle:focus,
@@ -57,7 +59,7 @@
 	}
 
 	.navbar-custom a {
-	    color: #fff;
+	    color: #F5F5DC;
 	}
 
 	.navbar-custom .nav li a {
@@ -87,7 +89,7 @@
 	}
 
 	.navbar-custom .nav li.active a:hover {
-	    color: #fff;
+	    color: #F5F5DC;
 	}
 
 	@media(min-width:768px) {
@@ -109,17 +111,68 @@
 	}
 </style>
 <script>
+	/*https://github.com/ractivejs/ractive-transitions-slide*/
+	var DEFAULTS = {
+			duration: 400,
+			easing: 'elastic'
+		};
+
+	var PROPS = [
+		'height',
+		'borderTopWidth',
+		'borderBottomWidth',
+		'paddingTop',
+		'paddingBottom',
+		'marginTop',
+		'marginBottom'
+	];
+
+	var COLLAPSED = {
+		height: 0,
+		borderTopWidth: 0,
+		borderBottomWidth: 0,
+		paddingTop: 0,
+		paddingBottom: 0,
+		marginTop: 0,
+		marginBottom: 0
+	};
+
 	component.exports = {
 
-		data: {
-			collapsed: false
+		easing: {
+			/* https://github.com/danro/easing-js/blob/master/easing.js*/
+			elastic: function(pos) {
+				return -1 * Math.pow(4,-8*pos) * Math.sin((pos*6-1)*(2*Math.PI)/2) + 1;
+			}
+		},
+
+		transitions: {
+			/*https://github.com/ractivejs/ractive-transitions-slide*/
+			slide: function slide ( t, params ) {
+				var targetStyle;
+
+				params = t.processParams( params, DEFAULTS );
+
+				if ( t.isIntro ) {
+					targetStyle = t.getStyle( PROPS );
+					t.setStyle( COLLAPSED );
+				} else {
+					// make style explicit, so we're not transitioning to 'auto'
+					t.setStyle( t.getStyle( PROPS ) );
+					targetStyle = COLLAPSED;
+				}
+
+				t.setStyle( 'overflowY', 'hidden' );
+
+				t.animateStyle( targetStyle, params ).then( t.complete );
+			}
 		},
 
 		oninit: function() {
 			var self = this;
 
 			this.on('toggle', function() {
-				self.get('collapsed') ? self.set('collapsed', false): self.set('collapsed', true);
+				self.toggle('expanded');
 			});
 
 		}
