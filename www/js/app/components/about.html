@@ -2,20 +2,15 @@
 <section id="about" class="container content-section text-center">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2">
-			<!-- <h2>About</h2>
-			<hr class="star-light"/>
-			<p>An Engineer interested in all aspects of Software. My Software Engineering interests include but are not limited to:  Object Oriented Programming, Functional (Reactive) Programming, the Web, Test/Behavior Driven Development.</p>
-			<p>Been a Full-Stack Java Technologies Programmer earlier, now an Isomorphic Javascript programmer, gearing up on Haskell.</p>
-			<p>I strongly believe in the power of Open Source and, hope to contribute my bit to this positive spiral.</p>
-			<p>This webpage uses some kewl Front-End Technologies. <a href="http://www.ractivejs.org/">RactiveJs</a> for Views, customized <a href="http://startbootstrap.com/template-overviews/grayscale/">Bootstrap Grayscale Theme</a>, gulp and gulp-plugins like <a href="https://github.com/jakubpawlowicz/clean-css">css-clean</a> for build, optimization and uglification.</p> -->
 			<div class="intro-text">
 				<h2>About</h2>
-				<hr class="star-light">
-				<span>Software Engineer - Web Expert - User Experience Designer</span>
+				<h6>Software Engineer<i class="fa fa-certificate"></i>Web Aficionado<i class="fa fa-certificate"></i>FRP Dilettante</h6>
 			</div>
-			<div>
-				<p>This webpage uses some kewl Front-End Technologies. <a href="http://www.ractivejs.org/">RactiveJs</a> for Views, customized <a href="http://startbootstrap.com/template-overviews/grayscale/">Bootstrap Grayscale Theme</a>, gulp and gulp-plugins like <a href="https://github.com/jakubpawlowicz/clean-css">css-clean</a> for build, optimization and uglification.</p>
-			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2">
+			<p>This webpage was built using <a href="http://www.ractivejs.org/">RactiveJs</a> for Views, customized <a href="http://startbootstrap.com/template-overviews/grayscale/">Bootstrap Grayscale Theme</a>, gulp and gulp-plugins like <a href="https://github.com/jakubpawlowicz/clean-css">css-clean</a> for build, optimization and uglification.</p>
 		</div>
 	</div>
 </section>
@@ -23,10 +18,18 @@
 	.content-section {
 		color: #3B444B;
 		background-color: #F5F5DC;
-	    padding-top: 100px;
+	    padding-top: 200px;
 	    height: 100%;
 	    width: 100%;
-	    padding-bottom: 10px;
+	    padding-bottom: 100px;
+	}
+	@media(max-width:767px) {
+	    .content-section {
+		    padding-top: 100px;
+		    height: cover;
+		    width: cover;
+		    padding-bottom: 50px;
+		}
 	}
 
 </style>
