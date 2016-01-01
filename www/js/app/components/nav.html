@@ -3,7 +3,7 @@
 <nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
-			<button type="button" on-click="toggle" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
 				<i class="fa fa-bars"></i>
 			</button>
 			<a class="navbar-brand" href="#page-top">
@@ -11,8 +11,8 @@
 			</a>
 		</div>
 
-		<div class="collapse navbar-collapse navbar-right navbar-main-collapse {{ expanded ? 'in': ''}}" >
-			<ul on-click="toggle" class="nav navbar-nav">
+		<div class="collapse navbar-collapse navbar-right navbar-main-collapse" >
+			<ul class="nav navbar-nav" data-toggle="collapse" data-target=".navbar-main-collapse">
 				<li  class="hidden">
 					<a href="#page-top"></a>
 				</li>
@@ -89,6 +89,11 @@
 	    color: #F5F5DC;
 	}
 
+	/* Remove float when navbar has been expanded */
+	ul.navbar-toggle {
+	    float: none;
+	}
+
 	@media(min-width:768px) {
 	    .navbar-custom {
 	        padding: 20px 0;
@@ -107,71 +112,4 @@
 	    }
 	}
 </style>
-<script>
-	/*https://github.com/ractivejs/ractive-transitions-slide*/
-	var DEFAULTS = {
-			duration: 400,
-			easing: 'elastic'
-		};
 
-	var PROPS = [
-		'height',
-		'borderTopWidth',
-		'borderBottomWidth',
-		'paddingTop',
-		'paddingBottom',
-		'marginTop',
-		'marginBottom'
-	];
-
-	var COLLAPSED = {
-		height: 0,
-		borderTopWidth: 0,
-		borderBottomWidth: 0,
-		paddingTop: 0,
-		paddingBottom: 0,
-		marginTop: 0,
-		marginBottom: 0
-	};
-
-	component.exports = {
-
-		easing: {
-			/* https://github.com/danro/easing-js/blob/master/easing.js*/
-			elastic: function(pos) {
-				return -1 * Math.pow(4,-8*pos) * Math.sin((pos*6-1)*(2*Math.PI)/2) + 1;
-			}
-		},
-
-		transitions: {
-			/*https://github.com/ractivejs/ractive-transitions-slide*/
-			slide: function slide ( t, params ) {
-				var targetStyle;
-
-				params = t.processParams( params, DEFAULTS );
-
-				if ( t.isIntro ) {
-					targetStyle = t.getStyle( PROPS );
-					t.setStyle( COLLAPSED );
-				} else {
-					// make style explicit, so we're not transitioning to 'auto'
-					t.setStyle( t.getStyle( PROPS ) );
-					targetStyle = COLLAPSED;
-				}
-
-				t.setStyle( 'overflowY', 'hidden' );
-
-				t.animateStyle( targetStyle, params ).then( t.complete );
-			}
-		},
-
-		oninit: function() {
-			var self = this;
-
-			this.on('toggle', function() {
-				self.toggle('expanded');
-			});
-
-		}
-	};
-</script>
