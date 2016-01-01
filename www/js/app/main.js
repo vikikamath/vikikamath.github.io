@@ -21,12 +21,14 @@
 // });
 
 define([
+			'jquery',
 			'rvc!app/components/nav',
 			'rvc!app/components/intro',
 			'rvc!app/components/about',
 			'rvc!app/components/contact',
-			'rvc!app/components/footer'
-		], function ( Nav, Intro, About, Contact, Footer ) {
+			'rvc!app/components/footer',
+			'bootstrap'
+		], function ( $, Nav, Intro, About, Contact, Footer ) {
 
 	'use strict';
 

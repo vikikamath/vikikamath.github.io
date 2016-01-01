@@ -1,83 +1,28 @@
-<!-- About Section -->
+
 <section id="about" class="container content-section text-center">
-	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2">
-			<div class="intro-text">
-				<h2>About</h2>
-				<h6>Software Engineer  <i class="fa fa-certificate"></i>  Web Aficionado  <i class="fa fa-certificate"></i>  FRP Dilettante</h6>
-			</div>
-		</div>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h2 class="section-heading">About</h2>
+            <h6 class="section-subheading text-muted">Software Engineer  <i class="fa fa-certificate"></i>  Web Aficionado  <i class="fa fa-certificate"></i>  FRP Dilettante</h6>
+        </div>
+    </div>
+    <div class="row">
+		<h4>This WebPage is powered by</h4>
 	</div>
-	<div class="row">
-		<p>This WebPage was built using following technologies</p>
-	</div>
-	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2">
-			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-			  <!-- Indicators -->
-			  <ol class="carousel-indicators">
-			  	{{#each items:i}}
-			  		<li data-target="#carousel-example-generic" data-slide-to="{{current}}" class="{{ i === current ? 'active': '' }}"></li>
-			  	{{/each}}
-			  </ol>
+    <div class="row">
+    	{{#each items}}
+    		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-4">
+		      <div class="tile">
+		        <a href="{{link}}" class="thumbnail">
+			      <img class="tile-img" src="{{img}}" alt="{{imgalt}}">
+			    </a>
+		      </div>
+		    </div>
 
-			  <!-- Wrapper for slides -->
-			  <div class="carousel-inner">
-			  	{{#each items:i}}
-			    <div class="item {{ i === current ? 'active': '' }}">
-			    	<!-- <div class="item" style="background-color: {{bgcolor}}; color: {{color}}"><span>{{text}}<span></div> -->
-			      <!-- <img src="http://placehold.it/600x200" alt="..."> -->
-			    	<div class="jumbotron" stye="background-color: {{bgcolor}}; color: {{color}}">
-						<h1>{{text}}</h1>
-					  	<p>{{desc}}</p>
-					  	<p><a class="btn btn-primary btn-lg" href="{{link}}" role="button">{{linktext}}</a></p>
-					</div>
-			      <!-- <div class="carousel-caption">
-			          <h3>{{linktext}}</h3>
-			      </div> -->
-			    </div>
-			    {{/each}}
-			    <!-- <div class="item">
-			      <img src="http://placehold.it/1200x315" alt="...">
-			      <div class="carousel-caption">
-			          <h3>Caption Text2</h3>
-			      </div>
-			    </div>
-			    <div class="item">
-			      <img src="http://placehold.it/1200x315" alt="...">
-			      <div class="carousel-caption">
-			          <h3>Caption Text3</h3>
-			      </div>
-			    </div> -->
-			  </div>
-
-			  <!-- Controls -->
-			  <button on-click="prev" class="left carousel-control" data-slide="prev">
-			    <span class="glyphicon glyphicon-chevron-left"></span>
-			  </button>
-			  <button on-click="next"class="right carousel-control" data-slide="next">
-			    <span class="glyphicon glyphicon-chevron-right"></span>
-			  </button>
-			</div>
-			<!-- <p>This webpage was built using <a href="http://www.ractivejs.org/">RactiveJs</a> for Views, customized <a href="http://startbootstrap.com/template-overviews/grayscale/">Bootstrap Grayscale Theme</a>, gulp and gulp-plugins like <a href="https://github.com/jakubpawlowicz/clean-css">css-clean</a> for build, optimization and uglification.</p> -->
-			<!-- <div id="slider">
-			  <button on-click="next"><i class="fa fa-chevron-right pull-right fa-w"></i></button>
-			  <button on-click="prev"><i class="fa fa-chevron-left pull-left fa-w"></i></button>
-			  <ul>
-			    <li>SLIDE 1</li>
-			    <li style="background: #aaa;">SLIDE 2</li>
-			    <li>SLIDE 3</li>
-			    <li style="background: #aaa;">SLIDE 4</li>
-			  </ul>
-			  <ul>
-			  	{{#each items:i}}
-					<li id="{{i}}" class="{{current === i ? 'active': ''">{{this}}</li>
-			  	{{/each}}
-			  </ul>
-			</div> -->
-		</div>
-	</div>
+    	{{/each}}
+    </div>
 </section>
+
 <style>
 	.content-section {
 		color: #3B444B;
@@ -96,38 +41,33 @@
 		}
 	}
 
-	.carousel-inner>.item>img {
-		border-radius: 10px;
+	.tile {
+	  width: 100%;
+	  display: inline-block;
+	  box-sizing: border-box;
+	  /*background: #fff;*/
+	  /*padding: 20px;*/
+	  margin-bottom: 30px;
 	}
-	.carousel-control {
-		background-color: #F5F5DC;
+	.tile-img {
+		width: 100%;
+		height: 100%;
+		border-radius: 10%;
+	}
+
+	.thumbnail {
+		padding: 0px;
 		border: none;
-		border-radius: 10px;
-		text-shadow: 0 5px 20px #555;
-	}
-	.carousel-control:focus,
-	.carousel-control:hover {
-		color: #3B444B;
-	}
-
-	.carousel-indicators li {
-		background-color: #F5F5DC;
-		border: 1px solid #3B444B;
-	}
-	.carousel-indicators li.active {
-		background-color: #3B444B
-	}
-
-	.item {
-		height: 500px;
-	}
-
-	.jumbotron {
-		height: 500px;
-		width: 500px;
-		margin-left: 200px;
 		background: none;
 	}
+
+/*.tile:hover,
+.tile:focus {
+	padding: 1px
+}*/
+
+
+
 
 </style>
 <script>
@@ -136,33 +76,15 @@
 		data: function() {
 
 			return {
-				current: 0,
 				items: [
-					{"text": "RequireJs", "desc": "RequireJS is a JavaScript file and module loader optimized for in-browser use", "bgcolor": "#FFF", "color": "#000", "link": "http://requirejs.org/", "linktext": "Learn More"},
-					{"text": "Grayscale", "desc": "A free, multipurpose, one page Bootstrap theme featuring a dark color scheme", "bgcolor": "#000", "color": "#FFF", "link": "http://startbootstrap.com/template-overviews/grayscale/", "linktext": "Learn More"},
-					{"text": "Bootstrap", "desc": "Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.", "bgcolor": "#563d7c", "color": "#FFF", "link": "http://getbootstrap.com/", "linktext": "Learn More"},
-					{"text": "Gulp", "desc": "Streaming build system that allows automating tasks", "bgcolor": "#cf4646", "color": "#FFF", "link": "http://gulpjs.com/", "linktext": "Learn More"},
-					{"text": "RactiveJs", "desc": "JS library for building reactive user interfaces. Features include data-binding, support for SVG and animations", "bgcolor": "#729d34", "color": "#F5F5DC", "link": "http://www.ractivejs.org/", "linktext": "Learn More"}
+					{"img": "img/bootstrap.png", "imgalt": "Bootstrap.js", "desc": "Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.", "link":"http://getbootstrap.com/" , "linktext": "Learn More"},
+					{"img": "img/grayscale.png", "imgalt": "Grayscale Bootstrap", "desc": "A free, multipurpose, one page Bootstrap theme featuring a dark color scheme", "link": "http://startbootstrap.com/template-overviews/grayscale/", "linktext": "Learn More"},
+					{"img": "img/gulp.png", "imgalt": "Gulp.js", "desc": "Streaming build system that allows automating tasks", "link": "http://gulpjs.com/", "linktext": "Learn More"},
+					{"img": "img/ractive.png", "imgalt": "Ractive.js", "desc": "JS library for building reactive user interfaces. Features include data-binding, support for SVG and animations", "link": "http://www.ractivejs.org/", "linktext": "Learn More"},
+					{"img": "img/requirejs.png", "imgalt": "RequireJS", "desc": "RequireJS is a JavaScript file and module loader optimized for in-browser use", "link": "http://requirejs.org/", "linktext": "Learn More"},
+					{"img": "img/fa.png", "imgalt": "Font Awesome", "desc": "The iconic font and CSS toolkit", "link": "https://fortawesome.github.io/Font-Awesome/", "linktext": "Learn More"}
 				]
 			};
-		},
-
-		oninit: function() {
-			var self = this;
-			var itemsLen = self.get('items').length;
-
-			this.on('next', function() {
-				var currentPosition = parseInt(self.get('current'), 10);
-				if (currentPosition < itemsLen)
-				self.set('current',((currentPosition + 1) % itemsLen) );
-			});
-
-			this.on('prev', function() {
-				var currentPosition = parseInt(self.get('current'), 10);
-				if (currentPosition > 0)
-				self.set('current',((currentPosition - 1) % itemsLen) );
-			});
-
 		}
 	}
 </script>
