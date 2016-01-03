@@ -6,7 +6,7 @@
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
 				<i class="fa fa-bars"></i>
 			</button>
-			<a class="navbar-brand" href="#page-top">
+			<a class="navbar-brand" href="{{pageTop ? '#page-top': '#contact'}}" on-click='toggle'>
 				<i class="fa fa-play-circle"></i>  <span class="light">Vikram</span> Kamath
 			</a>
 		</div>
@@ -112,4 +112,19 @@
 	    }
 	}
 </style>
+<script>
+	component.exports = {
+		data: function() {
+			return {
+				'pageTop': true
+			}
+		},
+		onrender: function() {
+			var self = this;
+			this.on('toggle', function(){
+				self.toggle('pageTop');
+			})
+		}
+	}
+</script>
 
