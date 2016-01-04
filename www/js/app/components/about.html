@@ -3,23 +3,40 @@
     <div class="row">
         <div class="col-lg-12 text-center">
             <h2 class="section-heading">About</h2>
-            <h6 class="section-subheading text-muted">Software Engineer  <i class="fa fa-certificate"></i>  Web Aficionado  <i class="fa fa-certificate"></i>  FRP Dilettante</h6>
+            <h6 class="section-subheading text-muted">Software Engineer &nbsp;<i class="fa fa-certificate"></i>&nbsp;  Web Aficionado  &nbsp;<i class="fa fa-certificate"></i>&nbsp;  FRP Dilettante</h6>
         </div>
     </div>
     <div class="row">
 		<h4>This WebPage is powered by</h4>
 	</div>
     <div class="row">
-    	{{#each items}}
-    		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-4">
-		      <div class="tile">
-		        <a href="{{link}}" class="thumbnail">
-			      <img class="tile-img" src="{{img}}" alt="{{imgalt}}">
-			    </a>
-		      </div>
+    	<div id="details">
+	        <ul class="list-inline tech-pills">
+	        	{{#each items:i}}
+	            <li class="visible-xs">
+					<a href="#details" on-click="showHide" class="btn btn-default btn-lg page-scroll" style="background-color: {{bgcolor}}; color: {{color}};" data-toggle="collapse" data-target=".details"><i class="fa fa-cog fa-fw"></i> <span class="network-name" style="letter-spacing: 2px;">{{name}}</span></a>
+	            </li>
+	            <li class="hidden-xs">
+					<a href="#about" on-click="showHide" class="btn btn-default btn-lg page-scroll" style="background-color: {{bgcolor}}; color: {{color}};" data-toggle="collapse" data-target=".details"><i class="fa fa-cog fa-fw"></i> <span class="network-name" style="letter-spacing: 2px;">{{name}}</span></a>
+	            </li>
+	            {{/each}}
+	        </ul>
+	    </div>
+	    <div>
+		    <div class="collapse details" style="background-color: {{bgcolor}}; color: {{color}};">
+		    	<a href="#about" on-click="showHide" class="page-scroll"><i class="fa fa-times fa-3x" style="color: {{color}};"></i></a>
+		    	<p>
+		    		<i class="fa fa-cogs fa-fw fa-2x fa-pull-left"></i>
+		        	<i class="fa fa-quote-left fa-fw fa-pull-left"></i>
+		        	<br/>
+					{{details}}
+					<br/>
+					<i class="fa fa-cogs fa-fw fa-2x fa-pull-right"></i>
+		        	<i class="fa fa-quote-right fa-fw fa-pull-right"></i>
+		        	<br/>
+		        </p>
 		    </div>
-
-    	{{/each}}
+	    </div>
     </div>
 </section>
 
@@ -28,63 +45,73 @@
 		color: #3B444B;
 		background-color: #F5F5DC;
 	    padding-top: 200px;
-	    height: 100%;
+	    /*height: 100%;*/
 	    width: 100%;
 	    padding-bottom: 100px;
 	}
 	@media(max-width:767px) {
 	    .content-section {
 		    padding-top: 100px;
-		    height: cover;
+		    /*height: cover;*/
 		    width: cover;
 		    padding-bottom: 50px;
 		}
 	}
-
-	.tile {
-	  width: 100%;
-	  display: inline-block;
-	  box-sizing: border-box;
-	  /*background: #fff;*/
-	  /*padding: 20px;*/
-	  margin-bottom: 30px;
-	}
-	.tile-img {
-		width: 100%;
-		height: 100%;
-		border-radius: 10%;
+	.details {
+		margin: 50px 50px;
+    	border-bottom: 5px solid #999;
+    	border-left: 3px solid #999;
+    	border-radius: 10px;
 	}
 
-	.thumbnail {
-		padding: 0px;
-		border: none;
-		background: none;
+	.tech-pills >li {
+		margin-top: 5px;
 	}
-
-/*.tile:hover,
-.tile:focus {
-	padding: 1px
-}*/
-
-
-
 
 </style>
 <script>
+	var $ = require('jquery');
 	component.exports = {
 
 		data: function() {
 
 			return {
 				items: [
-					{"img": "img/bootstrap.png", "imgalt": "Bootstrap.js", "desc": "Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.", "link":"http://getbootstrap.com/" , "linktext": "Learn More"},
-					{"img": "img/grayscale.png", "imgalt": "Grayscale Bootstrap", "desc": "A free, multipurpose, one page Bootstrap theme featuring a dark color scheme", "link": "http://startbootstrap.com/template-overviews/grayscale/", "linktext": "Learn More"},
-					{"img": "img/gulp.png", "imgalt": "Gulp.js", "desc": "Streaming build system that allows automating tasks", "link": "http://gulpjs.com/", "linktext": "Learn More"},
-					{"img": "img/ractive.png", "imgalt": "Ractive.js", "desc": "JS library for building reactive user interfaces. Features include data-binding, support for SVG and animations", "link": "http://www.ractivejs.org/", "linktext": "Learn More"},
-					{"img": "img/requirejs.png", "imgalt": "RequireJS", "desc": "RequireJS is a JavaScript file and module loader optimized for in-browser use", "link": "http://requirejs.org/", "linktext": "Learn More"},
-					{"img": "img/fa.png", "imgalt": "Font Awesome", "desc": "The iconic font and CSS toolkit", "link": "https://fortawesome.github.io/Font-Awesome/", "linktext": "Learn More"}
+					{"name":"Bootstrap", "img": "img/bootstrap.png", "imgalt": "bootstrap", "desc": "Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.", "link":"http://getbootstrap.com/" , "linktext": "Learn More", "bgcolor": "#6f5499", "color": "#fff"},
+					{"name":"Grayscale Theme", "img": "img/grayscale.png", "imgalt": "grayscale", "desc": "A free, multipurpose, one page Bootstrap theme featuring a dark color scheme", "link": "http://startbootstrap.com/template-overviews/grayscale/", "linktext": "Learn More", "bgcolor": "#000", "color": "#42dca3"},
+					{"name":"GulpJS", "img": "img/gulp.png", "imgalt": "gulp", "desc": "Streaming build system that allows automating tasks", "link": "http://gulpjs.com/", "linktext": "Learn More", "bgcolor": "#cf4646", "color": "#fff"},
+					{"name":"RactiveJS", "img": "img/ractive.png", "imgalt": "ractive", "desc": "JS library for building reactive user interfaces. Features include data-binding, support for SVG and animations", "link": "http://www.ractivejs.org/", "linktext": "Learn More", "bgcolor": "#729d34", "color": "#fff"},
+					{"name":"RequireJS", "img": "img/requirejs.png", "imgalt": "require", "desc": "RequireJS is a JavaScript file and module loader optimized for in-browser use", "link": "http://requirejs.org/", "linktext": "Learn More", "bgcolor": "#fff", "color": "#4d4d4d"},
+					{"name":"Font-Awesome", "img": "img/fa.png", "imgalt": "fontawesome", "desc": "The iconic font and CSS toolkit", "link": "https://fortawesome.github.io/Font-Awesome/", "linktext": "Learn More", "bgcolor": "#21b384", "color": "#fff"}
 				]
 			};
+		},
+
+		oninit: function() {
+			var self = this;
+			this.observe('details', function(nu, old){
+				var hide = true; // initial state
+				if (nu && old) { // details open, click another tile
+					hide = (nu === old);
+				} else if (nu) { // open tile
+					hide = false;
+				} else if (old) { // close tile
+					hide = true;
+				}
+
+				setTimeout(function(hide){
+					if (hide) {
+						$('.details').collapse('hide');
+					} else {
+						$('.details').collapse('show');
+					}
+				}.bind(null, hide), 500);
+			});
+			this.on('showHide', function(e) {
+				self.set('details', self.get(e.keypath +'.desc'));
+				self.set('bgcolor', self.get(e.keypath +'.bgcolor'));
+				self.set('color', self.get(e.keypath +'.color'));
+			});
 		}
 	}
 </script>
