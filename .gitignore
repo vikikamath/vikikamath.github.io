@@ -1,0 +1,17 @@
+# NPM Modules Dependency directory
+node_modules
+
+# Debug log
+npm-debug.log
+
+# Bower Modules Dependency directory
+bower_components
+
+#
+.DS_Store
+
+# Ignore everything under dist
+dist/*
+
+# Except
+!dist/index.html
