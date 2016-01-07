@@ -14,16 +14,16 @@
 	        <ul class="list-inline tech-pills">
 	        	{{#each items:i}}
 	            <li class="visible-xs">
-					<a href="#details" on-click="showHide" class="btn btn-default btn-lg page-scroll" style="background-color: {{bgcolor}}; color: {{color}};" data-toggle="collapse" data-target=".details"><i class="fa fa-cog fa-fw"></i> <span class="network-name" style="letter-spacing: 2px;">{{name}}</span></a>
+					<button on-click="showHide" class="btn btn-default btn-lg page-scroll" style="background-color: {{bgcolor}}; color: {{color}};" data-toggle="modal" data-target=".details-modal"><i class="fa fa-cog fa-fw"></i> <span class="network-name" style="letter-spacing: 2px;">{{name}}</span></button>
 	            </li>
 	            <li class="hidden-xs">
-					<a href="#about" on-click="showHide" class="btn btn-default btn-lg page-scroll" style="background-color: {{bgcolor}}; color: {{color}};" data-toggle="collapse" data-target=".details"><i class="fa fa-cog fa-fw"></i> <span class="network-name" style="letter-spacing: 2px;">{{name}}</span></a>
+					<a href="#about" on-click="showHide" class="btn btn-default btn-lg page-scroll" style="background-color: {{bgcolor}}; color: {{color}};"><i class="fa fa-cog fa-fw"></i> <span class="network-name" style="letter-spacing: 2px;">{{name}}</span></a>
 	            </li>
 	            {{/each}}
 	        </ul>
 	    </div>
 	    <div>
-		    <div class="collapse details" style="background-color: {{bgcolor}}; color: {{color}};">
+		    <div class="collapse details hidden-xs {{collapse}}" style="background-color: {{bgcolor}}; color: {{color}};">
 		    	<a href="#about" on-click="showHide" class="page-scroll"><i class="fa fa-times fa-3x" style="color: {{color}};"></i></a>
 		    	<p>
 		    		<i class="fa fa-cogs fa-fw fa-2x fa-pull-left"></i>
@@ -36,6 +36,22 @@
 		        	<br/>
 		        </p>
 		    </div>
+		    <div class="modal fade details-modal" tabindex="-1" role="dialog">
+			  	<div class="modal-dialog modal-lg">
+			    	<div class="modal-content" style="background-color: {{bgcolor}}; color: {{color}};">
+			    		<p>
+				    		<i class="fa fa-cogs fa-fw fa-2x fa-pull-left"></i>
+				        	<i class="fa fa-quote-left fa-fw fa-pull-left"></i>
+				        	<br/>
+							{{details}}
+							<br/>
+							<i class="fa fa-cogs fa-fw fa-2x fa-pull-right"></i>
+				        	<i class="fa fa-quote-right fa-fw fa-pull-right"></i>
+				        	<br/>
+				        </p>
+			    	</div>
+			  	</div>
+			</div>
 	    </div>
     </div>
 </section>
@@ -89,28 +105,20 @@
 
 		oninit: function() {
 			var self = this;
-			this.observe('details', function(nu, old){
-				var hide = true; // initial state
-				if (nu && old) { // details open, click another tile
-					hide = (nu === old);
-				} else if (nu) { // open tile
-					hide = false;
-				} else if (old) { // close tile
-					hide = true;
+
+			this.on('showHide', function(e) {
+				if (e.keypath){
+					self.set('details', self.get(e.keypath +'.desc'));
+					self.set('bgcolor', self.get(e.keypath +'.bgcolor'));
+					self.set('color', self.get(e.keypath +'.color'));
+					self.set('collapse', 'in');
+				} else {
+					self.set('details', '');
+					self.set('bgcolor', '');
+					self.set('color', '');
+					self.set('collapse', '');
 				}
 
-				setTimeout(function(hide){
-					if (hide) {
-						$('.details').collapse('hide');
-					} else {
-						$('.details').collapse('show');
-					}
-				}.bind(null, hide), 500);
-			});
-			this.on('showHide', function(e) {
-				self.set('details', self.get(e.keypath +'.desc'));
-				self.set('bgcolor', self.get(e.keypath +'.bgcolor'));
-				self.set('color', self.get(e.keypath +'.color'));
 			});
 		}
 	}
